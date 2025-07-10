@@ -1,20 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.petmanager.views;
 
-/**
- *
- * @author mvarg
- */
+import com.petmanager.controllers.Coordinator;
+import com.petmanager.models.dto.Pet;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.*;
+
 public class RegisterView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegisterView
-     */
+    private Coordinator myCoordinator;
+
+    
     public RegisterView() {
         initComponents();
+        setSize(1024,640);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
+        // Escalar imagen al iniciar
+        resizeImage();
+        
+        // Agregar listener para que se reescale cuando se cambia el tamaño
+        this.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                resizeImage();
+            }
+        });
+    }
+
+    private void resizeImage() {
+        // Cargar icono original
+        ImageIcon icon = new ImageIcon(getClass().getResource("/com/petmanager/images/bgPet.png"));
+        // Obtener la imagen
+        Image img = icon.getImage();
+        // Redimensionar
+        Image scaled = img.getScaledInstance(image.getWidth(), image.getHeight(), Image.SCALE_SMOOTH);
+        // Establecer en el JLabel
+        image.setIcon(new ImageIcon(scaled));
     }
 
     /**
@@ -26,57 +49,185 @@ public class RegisterView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        background = new javax.swing.JPanel();
+        h1 = new javax.swing.JLabel();
+        image = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
+        subtitle = new javax.swing.JLabel();
+        name = new javax.swing.JTextField();
+        lblSex = new javax.swing.JLabel();
+        lblBreed = new javax.swing.JLabel();
+        breed = new javax.swing.JTextField();
+        color = new javax.swing.JTextField();
+        lblColor = new javax.swing.JLabel();
+        jComboBoxSex = new javax.swing.JComboBox<>();
+        btnRegister = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1024, 640));
+
+        background.setBackground(new java.awt.Color(36, 101, 171));
+        background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        h1.setFont(new java.awt.Font("Bebas Neue", 1, 48)); // NOI18N
+        h1.setForeground(new java.awt.Color(255, 255, 255));
+        h1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        h1.setText("Administrador de mascotas");
+        background.add(h1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/petmanager/images/bgPet.png"))); // NOI18N
+        image.setMaximumSize(new java.awt.Dimension(512, 640));
+        image.setMinimumSize(new java.awt.Dimension(512, 640));
+        image.setPreferredSize(new java.awt.Dimension(512, 640));
+        background.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 512, 640));
+
+        lblNombre.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre.setText("Nombre");
+        background.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 180, 20));
+
+        btnCancelar.setBackground(new java.awt.Color(225, 27, 60));
+        btnCancelar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.setBorder(null);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        background.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 190, 40));
+
+        subtitle.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        subtitle.setForeground(new java.awt.Color(255, 255, 255));
+        subtitle.setText("Registrar Mascota");
+        background.add(subtitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 180, 40));
+        background.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 350, 40));
+
+        lblSex.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblSex.setForeground(new java.awt.Color(255, 255, 255));
+        lblSex.setText("Sexo");
+        background.add(lblSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 180, 20));
+
+        lblBreed.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblBreed.setForeground(new java.awt.Color(255, 255, 255));
+        lblBreed.setText("Raza");
+        background.add(lblBreed, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 180, 20));
+        background.add(breed, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 350, 40));
+        background.add(color, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 350, 40));
+
+        lblColor.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblColor.setForeground(new java.awt.Color(255, 255, 255));
+        lblColor.setText("Color pelaje");
+        background.add(lblColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, 180, 20));
+
+        jComboBoxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR SEXO", "HEMBRA", "MACHO" }));
+        jComboBoxSex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSexActionPerformed(evt);
+            }
+        });
+        background.add(jComboBoxSex, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 350, 40));
+
+        btnRegister.setBackground(new java.awt.Color(65, 136, 220));
+        btnRegister.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("REGISTRAR MASCOTA");
+        btnRegister.setBorder(null);
+        btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        background.add(btnRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 190, 40));
+
+        volver.setBackground(new java.awt.Color(65, 136, 220));
+        volver.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        volver.setForeground(new java.awt.Color(255, 255, 255));
+        volver.setText("VOLVER");
+        volver.setBorder(null);
+        volver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+        background.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, 1024, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegisterView().setVisible(true);
-            }
-        });
+    private void jComboBoxSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSexActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxSexActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        if (evt.getSource() == btnRegister) {
+           register(); 
+        }
+        if (evt.getSource() == btnCancelar) {
+          
+        }
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        this.dispose();
+        myCoordinator.showMainView();
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void register() {
+	Pet pet = new Pet();
+		
+	pet.setPetId(null);
+	pet.setName(name.getText());
+	pet.setColor(color.getText());
+	pet.setBreed(breed.getText());
+	pet.setSex(jComboBoxSex.getSelectedItem().toString());
+
+	String res = myCoordinator.petRegister(pet);
+        JOptionPane.showMessageDialog(null, res);
+	
+    }
+    
+    public void setMyCoordinator(Coordinator myCoordinator){
+        this.myCoordinator = myCoordinator;
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background;
+    private javax.swing.JTextField breed;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JTextField color;
+    private javax.swing.JLabel h1;
+    private javax.swing.JLabel image;
+    private javax.swing.JComboBox<String> jComboBoxSex;
+    private javax.swing.JLabel lblBreed;
+    private javax.swing.JLabel lblColor;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblSex;
+    private javax.swing.JTextField name;
+    private javax.swing.JLabel subtitle;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

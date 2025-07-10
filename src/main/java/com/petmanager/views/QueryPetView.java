@@ -1,27 +1,34 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package com.petmanager.views;
 
 import com.petmanager.controllers.Coordinator;
 import java.awt.Image;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
-public class MainView extends javax.swing.JFrame{
+/**
+ *
+ * @author mvarg
+ */
+public class QueryPetView extends javax.swing.JFrame {
 
     private Coordinator myCoordinator;
+
     
-    public void setCoordinator(Coordinator coordinator){
-        this.myCoordinator = coordinator;    
-    }
-    
-    public MainView() {
+    public QueryPetView() {
         initComponents();
         setSize(1024,640);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        
         // Escalar imagen al iniciar
         resizeImage();
         
+        // Agregar listener para que se reescale cuando se cambia el tamaño
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 resizeImage();
@@ -29,6 +36,9 @@ public class MainView extends javax.swing.JFrame{
         });
     }
 
+    /**
+     * Método para reescalar la imagen del JLabel
+     */
     private void resizeImage() {
         // Cargar icono original
         ImageIcon icon = new ImageIcon(getClass().getResource("/com/petmanager/images/bgPet.png"));
@@ -52,13 +62,13 @@ public class MainView extends javax.swing.JFrame{
         background = new javax.swing.JPanel();
         h1 = new javax.swing.JLabel();
         image = new javax.swing.JLabel();
+        lblNumId = new javax.swing.JLabel();
+        find = new javax.swing.JButton();
         subtitle = new javax.swing.JLabel();
-        registerPet = new javax.swing.JButton();
-        findPet = new javax.swing.JButton();
-        findAllPets = new javax.swing.JButton();
+        ID = new javax.swing.JTextField();
+        volver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1024, 640));
         setMinimumSize(new java.awt.Dimension(1024, 640));
 
         background.setBackground(new java.awt.Color(36, 101, 171));
@@ -76,49 +86,42 @@ public class MainView extends javax.swing.JFrame{
         image.setPreferredSize(new java.awt.Dimension(512, 640));
         background.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 512, 640));
 
+        lblNumId.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblNumId.setForeground(new java.awt.Color(255, 255, 255));
+        lblNumId.setText("Número de Identificacion");
+        background.add(lblNumId, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 220, 20));
+
+        find.setBackground(new java.awt.Color(65, 136, 220));
+        find.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        find.setForeground(new java.awt.Color(255, 255, 255));
+        find.setText("BUSCAR");
+        find.setBorder(null);
+        find.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findActionPerformed(evt);
+            }
+        });
+        background.add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 350, 40));
+
         subtitle.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         subtitle.setForeground(new java.awt.Color(255, 255, 255));
-        subtitle.setText("Menún principal");
+        subtitle.setText("Buscar mascota");
         background.add(subtitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 180, 40));
+        background.add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 350, 40));
 
-        registerPet.setBackground(new java.awt.Color(65, 136, 220));
-        registerPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        registerPet.setForeground(new java.awt.Color(255, 255, 255));
-        registerPet.setText("REGISTRAR MASCOTA");
-        registerPet.setBorder(null);
-        registerPet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        registerPet.addActionListener(new java.awt.event.ActionListener() {
+        volver.setBackground(new java.awt.Color(65, 136, 220));
+        volver.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        volver.setForeground(new java.awt.Color(255, 255, 255));
+        volver.setText("VOLVER");
+        volver.setBorder(null);
+        volver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerPetActionPerformed(evt);
+                volverActionPerformed(evt);
             }
         });
-        background.add(registerPet, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 220, 40));
-
-        findPet.setBackground(new java.awt.Color(65, 136, 220));
-        findPet.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        findPet.setForeground(new java.awt.Color(255, 255, 255));
-        findPet.setText("BUSCAR MASCOTA");
-        findPet.setBorder(null);
-        findPet.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        findPet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findPetActionPerformed(evt);
-            }
-        });
-        background.add(findPet, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 220, 40));
-
-        findAllPets.setBackground(new java.awt.Color(65, 136, 220));
-        findAllPets.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        findAllPets.setForeground(new java.awt.Color(255, 255, 255));
-        findAllPets.setText("VER LISTA DE MASCOTAS");
-        findAllPets.setBorder(null);
-        findAllPets.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        findAllPets.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findAllPetsActionPerformed(evt);
-            }
-        });
-        background.add(findAllPets, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, 220, 40));
+        background.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 70, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,36 +137,31 @@ public class MainView extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void registerPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerPetActionPerformed
-        if(evt.getSource() == registerPet){
-            this.setVisible(false);
-            myCoordinator.showRegisterView();
-        }
-    }//GEN-LAST:event_registerPetActionPerformed
+    private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
+        
+    }//GEN-LAST:event_findActionPerformed
 
-    private void findPetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findPetActionPerformed
-        if(evt.getSource() == findPet){
-            myCoordinator.showQueryPetView();
-        }
-    }//GEN-LAST:event_findPetActionPerformed
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        this.dispose();
+        myCoordinator.showMainView();
+    }//GEN-LAST:event_volverActionPerformed
 
-    private void findAllPetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findAllPetsActionPerformed
-        if(evt.getSource() == findAllPets){
-            myCoordinator.showQueryListPetView();
-        }
-    }//GEN-LAST:event_findAllPetsActionPerformed
-
+    /**
+     * @param args the command line arguments
+     */
     public void setMyCoordinator(Coordinator myCoordinator){
         this.myCoordinator = myCoordinator;
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ID;
     private javax.swing.JPanel background;
-    private javax.swing.JButton findAllPets;
-    private javax.swing.JButton findPet;
+    private javax.swing.JButton find;
     private javax.swing.JLabel h1;
     private javax.swing.JLabel image;
-    private javax.swing.JButton registerPet;
+    private javax.swing.JLabel lblNumId;
     private javax.swing.JLabel subtitle;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
